@@ -17,6 +17,10 @@ public class ImageTest {
         try {
             BufferedImage image = ImageIO.read(new File("D:\\gitRepos\\github\\tank\\tank_mashibing\\src\\images\\bulletD.gif"));
             assertNotNull(image);
+
+            BufferedImage image2 = ImageIO.read(ImageTest.class.getClassLoader().getResourceAsStream("images/bulletD.gif"));
+            //this.getClass() == ImageTest.class
+            assertNotNull(image2);
         } catch (IOException e) {
             e.printStackTrace();
         }
