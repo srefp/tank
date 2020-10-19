@@ -7,11 +7,11 @@ import java.text.DecimalFormat;
 
 public class BallFrame extends Frame {
     static final int BALL_POS_X = 200, BALL_POS_Y = 200;
-    static final int WINDOW_WIDTH = 800, WINDOW_HEIGHT = 600;
+    static final int WINDOW_WIDTH = 1000, WINDOW_HEIGHT = 600;
     static final int BALL_WIDTH = 10, BALL_HEIGHT = 10;
     static final int FIXED_POINT_WIDTH = 5, FIXED_POINT_HEIGHT = 5;
     static final int FIXED_POINT_X = 300, FIXED_POINT_Y = 100;
-    static final int SPEED = 0;
+    static final int SPEED = 1;
 
     Ball ball = new Ball(BALL_POS_X, BALL_POS_Y, -45);
     Line line = new Line(300, 100, 200, 200);
@@ -52,7 +52,7 @@ public class BallFrame extends Frame {
 
         g.setColor(Color.WHITE);
         DecimalFormat df = new DecimalFormat("0.00");
-        g.drawString("绳长：" + df.format(Line.L), 10, 60);
+        g.drawString("绳长：" + "cm" + df.format(Line.L), 10, 60);
         g.drawString("小球角度：" + df.format(ball.getTheta()), 10, 80);
         g.drawString("小球坐标：(" + df.format(ball.getX()) + ", " + df.format(ball.getY()) + ")", 10, 100);
         g.drawString("周期：" + df.format(calT()) + "s", 10, 120);

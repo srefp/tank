@@ -6,10 +6,13 @@ import static com.ball.BallFrame.SPEED;
 import static com.ball.Line.L;
 
 public class Ball {
+
+    private static final double RATE = 0.1;
     private double x, y;
+    private int num = 1;
 
     private double theta;
-    boolean dir = true;
+    boolean dir = false;
 
     static final double g = 9.8;
     static final int BALL_WIDTH = 10, BALL_HEIGHT = 10;
@@ -58,18 +61,22 @@ public class Ball {
         x = 300 + L * Math.sin(Math.toRadians(theta));
         y = 100 + L * Math.cos(Math.toRadians(theta));
 
-        x += SPEED;
+        x += num * SPEED;
+        num++;
     }
 
     public void calTheta() {
-        double omiga = Math.sqrt(2 * g * (Math.abs(this.y - 170))) / L;
-        if ((int) this.y == 170) {
+        double omiga = Math.sqrt(2 * g * (Math.abs(this.y - 200))) / L;
+        if (omiga == 0) {
+            omiga = 0.1;
+        }
+        if (this.y <= 200.0) {
             dir = !dir;
         }
         if (dir) {
-            this.theta += omiga * 0.05 * Main.DELTA_T;
+            this.theta += omiga * RATE * Main.DELTA_T;
         } else {
-            this.theta -= omiga * 0.05 * Main.DELTA_T;
+            this.theta -= omiga * RATE * Main.DELTA_T;
         }
     }
 
