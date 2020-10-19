@@ -6,6 +6,7 @@ import java.awt.event.WindowEvent;
 import java.text.DecimalFormat;
 
 public class BallFrame extends Frame {
+
     static final int BALL_POS_X = 200, BALL_POS_Y = 200;
     static final int WINDOW_WIDTH = 1000, WINDOW_HEIGHT = 600;
     static final int BALL_WIDTH = 10, BALL_HEIGHT = 10;
@@ -13,14 +14,25 @@ public class BallFrame extends Frame {
     static final int FIXED_POINT_X = 300, FIXED_POINT_Y = 100;
     static final int SPEED = 1;
 
-    Ball ball = new Ball(BALL_POS_X, BALL_POS_Y, -45);
-    Line line = new Line(300, 100, 200, 200);
-    Fpoint fpoint = new Fpoint(FIXED_POINT_X, FIXED_POINT_Y);
+    static Ball ball = null;
+    static Line line = null;
+    static Fpoint fpoint = null;
+
+    static {
+        init();
+    }
+
+    public static void init() {
+        ball = new Ball(BALL_POS_X, BALL_POS_Y, -45);
+        line = new Line(300, 100, 200, 200);
+        fpoint = new Fpoint(FIXED_POINT_X, FIXED_POINT_Y);
+    }
+
 
     public BallFrame() {
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         setResizable(false);
-        setTitle("ball");
+        setTitle("单摆仿真");
         setVisible(true);
 
         addWindowListener(new WindowAdapter() {
@@ -52,18 +64,10 @@ public class BallFrame extends Frame {
 
         g.setColor(Color.WHITE);
         DecimalFormat df = new DecimalFormat("0.00");
-        g.drawString("绳长：" + "cm" + df.format(Line.L), 10, 60);
-        g.drawString("小球角度：" + df.format(ball.getTheta()), 10, 80);
+        g.drawString("绳长：" + df.format(Line.L) + "cm", 10, 60);
+        g.drawString("小球角度：" + df.format(ball.getTheta()) + "°", 10, 80);
         g.drawString("小球坐标：(" + df.format(ball.getX()) + ", " + df.format(ball.getY()) + ")", 10, 100);
         g.drawString("周期：" + df.format(calT()) + "s", 10, 120);
-//        g.setColor(Color.WHITE);
-//        g.fillOval(300, 100, FIXED_POINT_WIDTH, FIXED_POINT_HEIGHT);
-//        g.setColor(Color.RED);
-//        g.fillOval(200, 200, BALL_WIDTH, BALL_HEIGHT);
-//        g.setColor(Color.YELLOW);
-//        int x1 = 300 + FIXED_POINT_WIDTH / 2, y1 = 100 + FIXED_POINT_HEIGHT / 2;
-//        int x2 = 200 + BALL_WIDTH / 2, y2 = 200 + BALL_HEIGHT / 2;
-//        g.drawLine(x1, y1, x2, y2);
 
         g.setColor(Color.WHITE);
         line.change(ball, fpoint);

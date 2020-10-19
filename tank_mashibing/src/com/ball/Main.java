@@ -7,7 +7,6 @@ public class Main {
 
         while (true) {
             Thread.sleep(DELTA_T);
-
             ballFrame.repaint();
         }
     }
